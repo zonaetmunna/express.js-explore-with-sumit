@@ -4,6 +4,9 @@ const express=require('express');
 const app=express();
 const cors=require('cors');
 
+const multer  = require('multer')
+const upload_folder="./uploadFolder";
+
 // port declared
 const port=5000;
 
@@ -11,15 +14,12 @@ const port=5000;
 app.use(express.json());
 app.use(cors());
 
-// api
-app.get('/',(req,res)=>{
-     res.send('hi express.js');
-});
+const upload=multer({
+     dest:upload_folder
+})
 
-app.post('/',(req,res)=>{
-     const body=req.body.toString();
-     console.log(body);
-     res.send('this is post check');
+app.post('/',upload.single(''),(req,res)=>{
+     
 })
 
 app.listen(port,()=>{
